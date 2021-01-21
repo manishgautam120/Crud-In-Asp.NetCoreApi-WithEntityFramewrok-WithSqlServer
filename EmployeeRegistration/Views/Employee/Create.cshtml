@@ -1,0 +1,68 @@
+﻿@model EmployeeRegistration.Models.Employee
+
+
+@if (Model.emp_id == 0)
+{
+    <h1> Add New Employee</h1>
+    {
+        ViewData["Title"] = "Add New Employee";
+    }
+}
+else
+{
+    <h1>Edit Employee</h1>
+    {
+        ViewData["Title"] = "Edit New Employee";
+    }
+}
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddEmployee">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" asp-for="emp_id" />
+                <label asp-for="emp_name" class="control-label"></label>
+                <span asp-validation-for="emp_name" class="text-danger"></span>
+                <input asp-for="emp_name" class="form-control" autocomplete="off" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="dep_id" class="control-label"></label>
+                <select asp-for="dep_id" class="form-control" asp-items="@(new SelectList(ViewBag.DepList,"dept_id","dept_name"))">
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="date_of_birth" class="control-label"></label>
+                <span asp-validation-for="date_of_birth" class="text-danger"></span>
+                <input asp-for="date_of_birth" class="form-control" autocomplete="off" />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="date_of_join" class="control-label"></label>
+                <span asp-validation-for="date_of_join" class="text-danger"></span>
+                <input asp-for="date_of_join" class="form-control" autocomplete="off" />
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+
+                <a asp-action="EmployeeList" class="btn btn-outline-success">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

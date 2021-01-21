@@ -1,0 +1,65 @@
+﻿@model IEnumerable<EmployeeRegistration.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employee List";
+}
+
+<h1>EmployeeList</h1>
+
+<p class="float-right">
+    <a asp-action="Create" class="btn btn-outline-primary">New Employee Entry</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.emp_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.emp_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_of_birth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_of_join)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.dep_id)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.emp_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.emp_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_of_birth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_of_join)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.dep_id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Create", new { emp_id = item.emp_id, item.emp_name,item.date_of_birth,item.date_of_join,item.dep_id },new { @class="btn btn-success"} ) |
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                @Html.ActionLink("Delete", "Delete", new { emp_id = item.emp_id }, new { @class = "btn btn-danger", onclick="return confirm('Do you really want to delete this record?')" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
